@@ -24,7 +24,8 @@
 
 /* Begin PBXFileReference section */
 		D45D7DB61DEA4140000CF27C /* StarAlgorithmWithHMMAndPHHM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = StarAlgorithmWithHMMAndPHHM; sourceTree = BUILT_PRODUCTS_DIR; };
-		D45D7DB91DEA4140000CF27C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D45D7DB91DEA4140000CF27C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../../../../../../Desktop/StarAlgorithmWithHMMAndPHHM/StarAlgorithmWithHMMAndPHHM/main.cpp; sourceTree = BUILT_PRODUCTS_DIR; };
+		D45D7DC11DEB34CC000CF27C /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				D45D7DB91DEA4140000CF27C /* main.cpp */,
+				D45D7DC11DEB34CC000CF27C /* input.txt */,
 			);
 			path = StarAlgorithmWithHMMAndPHHM;
 			sourceTree = "<group>";
@@ -249,6 +251,7 @@
 				D45D7DBF1DEA4140000CF27C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

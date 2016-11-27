@@ -23,6 +23,8 @@ int main(int argc, const char * argv[]) {
     
     cout << "Enter your age: ";
     cin >> data;
+    
+    //ignore() enter a basmadan programın ilerlemini durdurur.
     cin.ignore();
     
     // again write inputted data into the file.
