@@ -154,7 +154,7 @@ int main(int argc, const char * argv[]) {
         }
     }
     cout << AlignmentA << endl << AlignmentB << endl;
-     
+    
     return 0;
     
     
