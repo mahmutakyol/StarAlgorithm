@@ -65,7 +65,6 @@ int** SetAlignmentArrayLimits(int **alignmentArray, int s2Length, int s1Length){
 
 void SetZeros(int **alignmentArray, int i, int j){
     alignmentArray[i][j] = 0;
-    cout << alignmentArray[i][j];
 }
 
 void SetAlignmentValues(int **alignmentArray, int i, int j, int match, int missMatch, int gap, string s1, string s2){
@@ -81,7 +80,6 @@ void SetAlignmentValues(int **alignmentArray, int i, int j, int match, int missM
     int maxScore = max(max(score, scroeLeft), scoreUp);
     
     alignmentArray[i][j] = maxScore;
-    cout << alignmentArray[i][j];
 }
 
 void SetAlignmentArrayValues(int s1Length, int s2Length, int** alignmentArray, string s1, string s2, int match, int missMatch, int gap){
@@ -97,7 +95,6 @@ void SetAlignmentArrayValues(int s1Length, int s2Length, int** alignmentArray, s
                 SetAlignmentValues(alignmentArray, i, j, match, missMatch, gap, s1, s2);
             }
         }
-        cout << endl;
     }
 }
 
