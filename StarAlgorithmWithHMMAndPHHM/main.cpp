@@ -55,65 +55,53 @@ void ReadFile(){
     infile.close();
 }
 
-
-int main(int argc, const char * argv[]) {
-    
-    
-    string s1, s2;
-    
-    cout << "S1 => ";
-    getline(cin, s1);
-    
-    cout << "S2 => ";
-    getline(cin, s2);
-    int **alignmentArray;
-    int s1Length = (int)s1.length() - 1;
-    int s2Length = (int)s2.length() - 1;
-    
-    int match, missMatch, gap;
-    
-    match = 2;
-    missMatch = -1;
-    gap = -2;
-    
+int** SetAlignmentArrayLimits(int **alignmentArray, int s2Length, int s1Length){
     alignmentArray = new int*[s2Length + 2];
     for (int i = 0; i < s2Length + 2; i++) {
         alignmentArray[i] = new int[s1Length + 2];
     }
+    return alignmentArray;
+}
+
+void SetZeros(int **alignmentArray, int i, int j){
+    alignmentArray[i][j] = 0;
+    cout << alignmentArray[i][j];
+}
+
+void SetAlignmentValues(int **alignmentArray, int i, int j, int match, int missMatch, int gap, string s1, string s2){
+    int score = 0;
+    if (s1.at(j - 1) == s2.at(i - 1))
+        score = alignmentArray[i - 1][ j - 1] + (match);
+    else
+        score = alignmentArray[i - 1][ j - 1] + (missMatch);
     
+    int scroeLeft = alignmentArray[i][ j - 1] + (gap);
+    int scoreUp = alignmentArray[i - 1][ j] + (gap);
+    
+    int maxScore = max(max(score, scroeLeft), scoreUp);
+    
+    alignmentArray[i][j] = maxScore;
+    cout << alignmentArray[i][j];
+}
+
+void SetAlignmentArrayValues(int s1Length, int s2Length, int** alignmentArray, string s1, string s2, int match, int missMatch, int gap){
     for (int i = 0; i < (s2Length + 2); i++) {
         for (int j = 0; j < (s1Length + 2); j++) {
             if (i == 0) {
-                alignmentArray[i][j] = 0;
-                cout << alignmentArray[i][j];
+                SetZeros(alignmentArray, i, j);
             }
             else if (i != 0 && j == 0){
-                alignmentArray[i][j] = 0;
-                cout << alignmentArray[i][j];
+                SetZeros(alignmentArray, i, j);
             }
             else if(i >= 1 && j >= 1){
-                
-                int score = 0;
-                if (s1.at(j - 1) == s2.at(i - 1))
-                    score = alignmentArray[i - 1][ j - 1] + (match);
-                else
-                    score = alignmentArray[i - 1][ j - 1] + (missMatch);
-                
-                int scroeLeft = alignmentArray[i][ j - 1] + (gap);
-                int scoreUp = alignmentArray[i - 1][ j] + (gap);
-                
-                int maxScore = max(max(score, scroeLeft), scoreUp);
-                
-                alignmentArray[i][j] = maxScore;
-                cout << alignmentArray[i][j];
+                SetAlignmentValues(alignmentArray, i, j, match, missMatch, gap, s1, s2);
             }
         }
         cout << endl;
     }
+}
 
-    
-    
-    //Traceback Step
+void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length){
     char s2Array[1024];
     char s1Array[1024];
     strcpy(s2Array, s2.c_str());
@@ -154,6 +142,38 @@ int main(int argc, const char * argv[]) {
         }
     }
     cout << AlignmentA << endl << AlignmentB << endl;
+}
+
+int main(int argc, const char * argv[]) {
+    
+    
+    string s1, s2;
+    
+    cout << "S1 => ";
+    getline(cin, s1);
+    
+    cout << "S2 => ";
+    getline(cin, s2);
+    int **alignmentArray;
+    int s1Length = (int)s1.length() - 1;
+    int s2Length = (int)s2.length() - 1;
+    
+    int match, missMatch, gap;
+    
+    match = 2;
+    missMatch = -1;
+    gap = -2;
+    
+    
+    //AlignmentArray Limit Settings
+    alignmentArray = SetAlignmentArrayLimits(alignmentArray, s1Length, s2Length);
+    
+    //AlignmentArray Value Settings
+    SetAlignmentArrayValues(s1Length, s2Length, alignmentArray, s1, s2, match, missMatch, gap);
+    
+    //Traceback Step
+    TracebackAlgorithm(alignmentArray, s1, s2, s1Length, s2Length);
+    
     
     return 0;
     
