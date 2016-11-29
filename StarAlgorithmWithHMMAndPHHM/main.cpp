@@ -98,7 +98,18 @@ void SetAlignmentArrayValues(int s1Length, int s2Length, int** alignmentArray, s
     }
 }
 
-void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length){
+int Difference(string alignmentA, string alignmentB){
+    int score = 0;
+    for (int i = 0; i < alignmentA.length(); i++) {
+        if (alignmentA.at(i) != alignmentB.at(i)) {
+            score++;
+        }
+    }
+    
+    return score;
+}
+
+void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string* array, int x, int y, bool isChanged){
     char s2Array[1024];
     char s1Array[1024];
     strcpy(s2Array, s2.c_str());
@@ -138,38 +149,36 @@ void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length
             m = m - 1;
         }
     }
-    cout << AlignmentA << endl << AlignmentB << endl;
+    int result = Difference(AlignmentA, AlignmentB);
+    
+    if (!isChanged) {
+        array[x] = AlignmentA;
+        array[y] = AlignmentB;
+    }
+    else {
+        array[x] = AlignmentB;
+        array[y] = AlignmentA;
+    }
+    
+    cout << AlignmentA << endl << AlignmentB << endl << result << endl;
 }
 
-int main(int argc, const char * argv[]) {
+
+
+void StarSolution(int **alignmentArray, int s1Length, int s2Length, int match, int missMatch, int gap, string s1, string s2, string* array, int x, int y, bool isChanged){
     
-    
-    string s1, s2, s3, s4, s5;
-    
-    cout << "S1 => ";
-    getline(cin, s1);
-    
-    cout << "S2 => ";
-    getline(cin, s2);
-    
-    cout << "S3 => ";
-    getline(cin, s3);
-    
-    cout << "S4 => ";
-    getline(cin, s4);
-    
-    cout << "S5 => ";
-    getline(cin, s5);
-    int **alignmentArray;
-    int s1Length = (int)s1.length() - 1;
-    int s2Length = (int)s2.length() - 1;
-    
-    int match, missMatch, gap;
-    
-    match = 2;
-    missMatch = -1;
-    gap = -2;
-    
+    if(s2Length > s1Length){
+        string stringTemp = s1;
+        int intTemp = s1Length;
+        s1 = s2;
+        s2 = stringTemp;
+        s1Length = s2Length;
+        s2Length = intTemp;
+        isChanged = true;
+    }
+    else{
+        isChanged = false;
+    }
     
     //AlignmentArray Limit Settings
     alignmentArray = SetAlignmentArrayLimits(alignmentArray, s1Length, s2Length);
@@ -178,8 +187,61 @@ int main(int argc, const char * argv[]) {
     SetAlignmentArrayValues(s1Length, s2Length, alignmentArray, s1, s2, match, missMatch, gap);
     
     //Traceback Step
-    TracebackAlgorithm(alignmentArray, s1, s2, s1Length, s2Length);
+    TracebackAlgorithm(alignmentArray, s1, s2, s1Length, s2Length, array, x, y, isChanged);
+}
+
+int main(int argc, const char * argv[]) {
     
+    int **alignmentArray;
+    int match, missMatch, gap;
+    bool isChanged = false;
+    
+    match = 2;
+    missMatch = -1;
+    gap = -2;
+
+    string starArray[5];
+    
+    cout << "S1 => ";
+    getline(cin, starArray[0]);
+    
+    cout << "S2 => ";
+    getline(cin, starArray[1]);
+    
+    cout << "S3 => ";
+    getline(cin, starArray[2]);
+    
+    cout << "S4 => ";
+    getline(cin, starArray[3]);
+    
+    cout << "S5 => ";
+    getline(cin, starArray[4]);
+    
+    int s1Length = 0;
+    int s2Length = 0;
+    
+//    s1Length = (int)starArray[0].length() -1;
+//    s2Length = (int)starArray[1].length() -1;
+//    
+//    StarSolution(alignmentArray, s1Length, s2Length, match, missMatch, gap, starArray[0], starArray[1], starArray, i, j);
+    
+    
+    for (int i = 0; i < 5; i++) {
+        for (int j = i+1; j < 5; j++) {
+            
+            s1Length = (int)starArray[i].length() -1;
+            s2Length = (int)starArray[j].length() -1;
+            StarSolution(alignmentArray, s1Length, s2Length, match, missMatch, gap, starArray[i], starArray[j], starArray, i, j, isChanged);
+            cout << endl;
+        }
+    }
+    
+    //DATA SET
+    // CCTGCTGCAG
+    // GATGTGCCG
+    // GATGTGCAG
+    // CCGCTAGCAG
+    // CCTGTAGG
     
     return 0;
     
