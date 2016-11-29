@@ -144,13 +144,22 @@ void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length
 int main(int argc, const char * argv[]) {
     
     
-    string s1, s2;
+    string s1, s2, s3, s4, s5;
     
     cout << "S1 => ";
     getline(cin, s1);
     
     cout << "S2 => ";
     getline(cin, s2);
+    
+    cout << "S3 => ";
+    getline(cin, s3);
+    
+    cout << "S4 => ";
+    getline(cin, s4);
+    
+    cout << "S5 => ";
+    getline(cin, s5);
     int **alignmentArray;
     int s1Length = (int)s1.length() - 1;
     int s2Length = (int)s2.length() - 1;
