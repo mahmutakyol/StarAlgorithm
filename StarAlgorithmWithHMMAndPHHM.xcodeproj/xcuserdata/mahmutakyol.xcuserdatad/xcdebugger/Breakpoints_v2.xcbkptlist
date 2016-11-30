@@ -6,22 +6,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
-            timestampString = "502150895.335677"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "main(int argc, const char * argv[])"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -74,28 +58,156 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
-            timestampString = "502150895.335677"
+            timestampString = "502233644.633147"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "StarSolution(int **alignmentArray, int s1Length, int s2Length, int match, int missMatch, int gap, string s1, string s2, string* array, int x, int y, bool isChanged)"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "StarSolution(int **alignmentArray, int s1Length, int s2Length, int match, int missMatch, int gap, string s1, string s2, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
-            timestampString = "502150942.189643"
+            timestampString = "502233644.633147"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
+            timestampString = "502233644.633147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
+            timestampString = "502233644.633147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
+            timestampString = "502233644.633147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "main(int argc, const char * argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
+            timestampString = "502233644.633147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
+            landmarkName = "MTotals(int resultArray[5][5], int l)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
+            timestampString = "502233644.633147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
+            timestampString = "502233644.633147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
+            timestampString = "502233057.647082"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string* array, int x, int y, bool isChanged, int resultArray[5][5], bool isSet)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "StarAlgorithmWithHMMAndPHHM/main.cpp"
+            timestampString = "502233131.392763"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string* array, int x, int y, bool isChanged, int resultArray[5][5], bool isSet)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>

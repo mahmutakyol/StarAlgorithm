@@ -109,7 +109,7 @@ int Difference(string alignmentA, string alignmentB){
     return score;
 }
 
-void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string* array, int x, int y, bool isChanged){
+void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet){
     char s2Array[1024];
     char s1Array[1024];
     strcpy(s2Array, s2.c_str());
@@ -119,6 +119,8 @@ void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length
     string AlignmentB = "";
     int m = s2Length + 1;
     int n = s1Length + 1;
+    int newS1L = 0;
+    int newS2L = 0;
     while (m > 0 && n > 0)
     {
         int scroeDiag = 0;
@@ -149,7 +151,22 @@ void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length
             m = m - 1;
         }
     }
+    
     int result = Difference(AlignmentA, AlignmentB);
+    
+    newS1L = (int)AlignmentA.length() - 1;
+    newS2L = (int)AlignmentB.length() - 1;
+    
+    if(newS1L > s1Length){
+        
+        for (int i = x + 1; i < y; i++) {
+            int sIndex = (int)AlignmentA.find('-');
+            string x = "-";
+            array[i].insert(sIndex, x);
+//            cout << array[i] << endl;
+        }
+        
+    }
     
     if (!isChanged) {
         array[x] = AlignmentA;
@@ -159,13 +176,31 @@ void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length
         array[x] = AlignmentB;
         array[y] = AlignmentA;
     }
+    if (resultArray[0][0] == 0 ) {
+        isSet = true;
+    }
+    if (!isSet){
+        for (int t = 0; t < 5; t++) {
+            for (int z = 0; z < 5; z++) {
+                if (t == x && z == y) {
+                    resultArray[t][z] = result;
+                }
+                else {
+                    resultArray[t][z] = 0;
+                }
+            }
+        }
+    }
+    else {
+        resultArray[x][y] = result;
+    }
     
-    cout << AlignmentA << endl << AlignmentB << endl << result << endl;
+//    cout << AlignmentA << endl << AlignmentB << endl << result << endl << resultArray[x][y];
 }
 
 
 
-void StarSolution(int **alignmentArray, int s1Length, int s2Length, int match, int missMatch, int gap, string s1, string s2, string* array, int x, int y, bool isChanged){
+void StarSolution(int **alignmentArray, int s1Length, int s2Length, int match, int missMatch, int gap, string s1, string s2, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet){
     
     if(s2Length > s1Length){
         string stringTemp = s1;
@@ -187,7 +222,15 @@ void StarSolution(int **alignmentArray, int s1Length, int s2Length, int match, i
     SetAlignmentArrayValues(s1Length, s2Length, alignmentArray, s1, s2, match, missMatch, gap);
     
     //Traceback Step
-    TracebackAlgorithm(alignmentArray, s1, s2, s1Length, s2Length, array, x, y, isChanged);
+    TracebackAlgorithm(alignmentArray, s1, s2, s1Length, s2Length, array, x, y, isChanged, resultArray, isSet);
+}
+
+int MTotals(int resultArray[5][5], int l){
+    int m = 0;
+    for (int k = 0; k < 5; k++) {
+        m = m + resultArray[l][k];
+    }
+    return m;
 }
 
 int main(int argc, const char * argv[]) {
@@ -195,6 +238,8 @@ int main(int argc, const char * argv[]) {
     int **alignmentArray;
     int match, missMatch, gap;
     bool isChanged = false;
+    int resultArray[5][5];
+    bool isSet = false;
     
     match = 2;
     missMatch = -1;
@@ -202,20 +247,26 @@ int main(int argc, const char * argv[]) {
 
     string starArray[5];
     
-    cout << "S1 => ";
-    getline(cin, starArray[0]);
+    starArray[0] = "CCTGCTGCAG";
+    starArray[1] = "GATGTGCCG";
+    starArray[2] = "GATGTGCAG";
+    starArray[3] = "CCGCTAGCAG";
+    starArray[4] = "CCTGTAGG";
     
-    cout << "S2 => ";
-    getline(cin, starArray[1]);
-    
-    cout << "S3 => ";
-    getline(cin, starArray[2]);
-    
-    cout << "S4 => ";
-    getline(cin, starArray[3]);
-    
-    cout << "S5 => ";
-    getline(cin, starArray[4]);
+//    cout << "S1 => ";
+//    getline(cin, starArray[0]);
+//    
+//    cout << "S2 => ";
+//    getline(cin, starArray[1]);
+//    
+//    cout << "S3 => ";
+//    getline(cin, starArray[2]);
+//    
+//    cout << "S4 => ";
+//    getline(cin, starArray[3]);
+//    
+//    cout << "S5 => ";
+//    getline(cin, starArray[4]);
     
     int s1Length = 0;
     int s2Length = 0;
@@ -223,7 +274,7 @@ int main(int argc, const char * argv[]) {
 //    s1Length = (int)starArray[0].length() -1;
 //    s2Length = (int)starArray[1].length() -1;
 //    
-//    StarSolution(alignmentArray, s1Length, s2Length, match, missMatch, gap, starArray[0], starArray[1], starArray, i, j);
+//    StarSolution(alignmentArray, s1Length, s2Length, match, missMatch, gap, starArray[0], starArray[1], starArray, 0, 1, isChanged);
     
     
     for (int i = 0; i < 5; i++) {
@@ -231,9 +282,29 @@ int main(int argc, const char * argv[]) {
             
             s1Length = (int)starArray[i].length() -1;
             s2Length = (int)starArray[j].length() -1;
-            StarSolution(alignmentArray, s1Length, s2Length, match, missMatch, gap, starArray[i], starArray[j], starArray, i, j, isChanged);
-            cout << endl;
+            StarSolution(alignmentArray, s1Length, s2Length, match, missMatch, gap, starArray[i], starArray[j], starArray, i, j, isChanged, resultArray, isSet);
+//            cout << endl;
         }
+    }
+    
+    for (int k = 0; k < 5; k++) {
+        for (int l = 0; l < 5 ; l++) {
+            resultArray[l][k] = resultArray[k][l];
+        }
+    }
+    
+    int m1 = 0, m2 = 0, m3 = 0, m4 = 0, m5 = 0;
+    
+    m1 = MTotals(resultArray, 0);
+    m2 = MTotals(resultArray, 1);
+    m3 = MTotals(resultArray, 2);
+    m4 = MTotals(resultArray, 3);
+    m5 = MTotals(resultArray, 4);
+    
+    int less = min(m1, min(m2, min(m3, min(m4, m5))));
+
+    for (int k = 0; k < 5; k++){
+        cout << starArray[k] << endl;
     }
     
     //DATA SET
@@ -243,6 +314,8 @@ int main(int argc, const char * argv[]) {
     // CCGCTAGCAG
     // CCTGTAGG
     
+    //CC-GCTAGCAG
+    //GATG-TGCCG
     return 0;
     
     
