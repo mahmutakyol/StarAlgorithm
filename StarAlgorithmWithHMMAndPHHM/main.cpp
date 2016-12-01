@@ -6,53 +6,84 @@
 #include <math.h>
 using namespace std;
 
-void CreateFile(char fileName[]){
-    
-    char data[100];
+void CreateFile(char fileName[], string* data, int length){
     
     ofstream outfile;
     outfile.open(fileName);
     
     cout << "Writing to the file" << endl;
-    cout << "Enter your name: ";
-    cin.getline(data, 100);
     
-    // write inputted data into the file.
-    outfile << data << endl;
-    
-    cout << "Enter your age: ";
-    cin >> data;
-    
-    //ignore() enter a basmadan programın ilerlemini durdurur.
-    cin.ignore();
-    
-    // again write inputted data into the file.
-    outfile << data << endl;
+    for (int i  = 0; i < length; i++) {
+        // write inputted data into the file.
+        outfile << data[i] << endl;
+        
+    }
     
     // close the opened file.
     outfile.close();
     
 }
 
-void ReadFile(){
+string* SetStarArrayLimits(string* starArray, int length){
+    starArray = new string[length];
+    return starArray;
+}
+
+string* ReadFile(string* lineArray, int matchArray[3]){
     
-    char data[100];
     // open a file in read mode.
     ifstream infile;
     infile.open("input.txt");
+    int lineCount = 0;
     
-    cout << "Reading from the file" << endl;
-    infile >> data;
+    string str;
+    string file_contents;
+    while (std::getline(infile, str))
+    {
+        file_contents += str;
+        file_contents.push_back('*');
+        lineCount ++;
+    }
     
-    // write the data at the screen.
-    cout << data << endl;
+    lineArray = SetStarArrayLimits(lineArray, lineCount);
     
-    // again read the data from the file and display it.
-    infile >> data;
-    cout << data << endl;
+    string delimiter = "*";
+    size_t pos = 0;
+    int i = 0;
+    while ((pos = file_contents.find(delimiter)) != std::string::npos) {
+        
+        lineArray[i] = file_contents.substr(0, pos);
+        file_contents.erase(0, pos + delimiter.length());
+        i++;
+    }
+    string del = ",";
+    while ((pos = lineArray[0].find(del)) != std::string::npos) {
+        if (matchArray[0] == 0) {
+            matchArray[0] = stoi(lineArray[0].substr(0, pos).c_str());
+            lineArray[0].erase(0, pos + del.length());
+        }
+        else if(matchArray[1] == 0){
+            matchArray[1] = stoi(lineArray[0].substr(0, pos));
+            lineArray[0].erase(0, pos + del.length());
+        }
+        
+    }
+    matchArray[2] = stoi(lineArray[0].substr(0, pos));
+    lineArray[0].erase(0, pos + del.length());
     
-    // close the opened file.
+    for (int k = 1; k < lineCount; k ++) {
+        file_contents = lineArray[k];
+        lineArray[k] = "";
+        while ((pos = file_contents.find(del)) != std::string::npos) {
+            
+            lineArray[k] += file_contents.substr(0, pos);
+            file_contents.erase(0, pos + del.length());
+        }
+        lineArray[k] += file_contents.substr(0, pos);
+        lineArray[k-1] = lineArray[k];
+    }
     infile.close();
+    return lineArray;
 }
 
 int** SetAlignmentArrayLimits(int **alignmentArray, int s2Length, int s1Length){
@@ -109,7 +140,7 @@ int Difference(string alignmentA, string alignmentB){
     return score;
 }
 
-void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet){
+void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length, int s2Length, string array[5], int x, int y, bool isChanged, int** resultArray, bool isSet, int stringCount){
     char s2Array[1024];
     char s1Array[1024];
     strcpy(s2Array, s2.c_str());
@@ -180,8 +211,8 @@ void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length
         isSet = true;
     }
     if (!isSet){
-        for (int t = 0; t < 5; t++) {
-            for (int z = 0; z < 5; z++) {
+        for (int t = 0; t < stringCount; t++) {
+            for (int z = 0; z < stringCount; z++) {
                 if (t == x && z == y) {
                     resultArray[t][z] = result;
                 }
@@ -195,12 +226,9 @@ void TracebackAlgorithm(int** alignmentArray, string s1, string s2, int s1Length
         resultArray[x][y] = result;
     }
     
-//    cout << AlignmentA << endl << AlignmentB << endl << result << endl << resultArray[x][y];
 }
 
-
-
-void StarSolution(int **alignmentArray, int s1Length, int s2Length, int match, int missMatch, int gap, string s1, string s2, string array[5], int x, int y, bool isChanged, int resultArray[5][5], bool isSet){
+void StarSolution(int **alignmentArray, int s1Length, int s2Length, int match, int missMatch, int gap, string s1, string s2, string array[5], int x, int y, bool isChanged, int** resultArray, bool isSet, int stringCount){
     
     if(s2Length > s1Length){
         string stringTemp = s1;
@@ -222,10 +250,10 @@ void StarSolution(int **alignmentArray, int s1Length, int s2Length, int match, i
     SetAlignmentArrayValues(s1Length, s2Length, alignmentArray, s1, s2, match, missMatch, gap);
     
     //Traceback Step
-    TracebackAlgorithm(alignmentArray, s1, s2, s1Length, s2Length, array, x, y, isChanged, resultArray, isSet);
+    TracebackAlgorithm(alignmentArray, s1, s2, s1Length, s2Length, array, x, y, isChanged, resultArray, isSet, stringCount);
 }
 
-int MTotals(int resultArray[5][5], int l){
+int MTotals(int** resultArray, int l, int stringCount){
     int m = 0;
     for (int k = 0; k < 5; k++) {
         m = m + resultArray[l][k];
@@ -238,84 +266,68 @@ int main(int argc, const char * argv[]) {
     int **alignmentArray;
     int match, missMatch, gap;
     bool isChanged = false;
-    int resultArray[5][5];
+    int** resultArray;
     bool isSet = false;
+    int stringCount = 0;
     
-    match = 2;
-    missMatch = -1;
-    gap = -2;
-
-    string starArray[5];
+    match = 0;
+    missMatch = 0;
+    gap = 0;
     
-    starArray[0] = "CCTGCTGCAG";
-    starArray[1] = "GATGTGCCG";
-    starArray[2] = "GATGTGCAG";
-    starArray[3] = "CCGCTAGCAG";
-    starArray[4] = "CCTGTAGG";
+    string* starArray;
+    stringCount = 5;
     
-//    cout << "S1 => ";
-//    getline(cin, starArray[0]);
-//    
-//    cout << "S2 => ";
-//    getline(cin, starArray[1]);
-//    
-//    cout << "S3 => ";
-//    getline(cin, starArray[2]);
-//    
-//    cout << "S4 => ";
-//    getline(cin, starArray[3]);
-//    
-//    cout << "S5 => ";
-//    getline(cin, starArray[4]);
+    starArray = SetStarArrayLimits(starArray, stringCount);
+    
+    int matchArray[3] = {match, missMatch, gap};
+    
+    starArray = ReadFile(starArray, matchArray);
+    for (int p = 0; p < 3 ; p++) {
+        if (p == 0) {
+            match = matchArray[p];
+        }
+        else if(p == 1){
+            missMatch = matchArray[p];
+        }
+        else if(p == 2){
+            gap = matchArray[p];
+        }
+    }
+    resultArray = SetAlignmentArrayLimits(resultArray, stringCount, stringCount);
+    
     
     int s1Length = 0;
     int s2Length = 0;
     
-//    s1Length = (int)starArray[0].length() -1;
-//    s2Length = (int)starArray[1].length() -1;
-//    
-//    StarSolution(alignmentArray, s1Length, s2Length, match, missMatch, gap, starArray[0], starArray[1], starArray, 0, 1, isChanged);
     
     
-    for (int i = 0; i < 5; i++) {
-        for (int j = i+1; j < 5; j++) {
+    for (int i = 0; i < stringCount; i++) {
+        for (int j = i+1; j < stringCount; j++) {
             
             s1Length = (int)starArray[i].length() -1;
             s2Length = (int)starArray[j].length() -1;
-            StarSolution(alignmentArray, s1Length, s2Length, match, missMatch, gap, starArray[i], starArray[j], starArray, i, j, isChanged, resultArray, isSet);
-//            cout << endl;
+            StarSolution(alignmentArray, s1Length, s2Length, match, missMatch, gap, starArray[i], starArray[j], starArray, i, j, isChanged, resultArray, isSet, stringCount);
         }
     }
     
-    for (int k = 0; k < 5; k++) {
-        for (int l = 0; l < 5 ; l++) {
+    for (int k = 0; k < stringCount; k++) {
+        for (int l = 0; l < stringCount ; l++) {
             resultArray[l][k] = resultArray[k][l];
         }
     }
     
     int m1 = 0, m2 = 0, m3 = 0, m4 = 0, m5 = 0;
     
-    m1 = MTotals(resultArray, 0);
-    m2 = MTotals(resultArray, 1);
-    m3 = MTotals(resultArray, 2);
-    m4 = MTotals(resultArray, 3);
-    m5 = MTotals(resultArray, 4);
+    m1 = MTotals(resultArray, 0, stringCount);
+    m2 = MTotals(resultArray, 1, stringCount);
+    m3 = MTotals(resultArray, 2, stringCount);
+    m4 = MTotals(resultArray, 3, stringCount);
+    m5 = MTotals(resultArray, 4, stringCount);
     
     int less = min(m1, min(m2, min(m3, min(m4, m5))));
-
-    for (int k = 0; k < 5; k++){
-        cout << starArray[k] << endl;
-    }
     
-    //DATA SET
-    // CCTGCTGCAG
-    // GATGTGCCG
-    // GATGTGCAG
-    // CCGCTAGCAG
-    // CCTGTAGG
+    CreateFile("msa.txt", starArray, stringCount);
     
-    //CC-GCTAGCAG
-    //GATG-TGCCG
     return 0;
     
     

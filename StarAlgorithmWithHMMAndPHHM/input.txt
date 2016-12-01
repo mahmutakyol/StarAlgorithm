@@ -1,2 +1,6 @@
-test
-ts
+2,-1,-2
+C,C,T,G,C,T,G,C,A,G
+G,A,T,G,T,G,C,C,G
+G,A,T,G,T,G,C,A,G
+C,C,G,C,T,A,G,C,A,G
+C,C,T,G,T,A,G,G
