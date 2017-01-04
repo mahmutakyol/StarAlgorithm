@@ -6,10 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		D45D7DBA1DEA4140000CF27C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D45D7DB91DEA4140000CF27C /* main.cpp */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		D45D7DB41DEA4140000CF27C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -23,9 +19,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		D45D7DB61DEA4140000CF27C /* StarAlgorithmWithHMMAndPHHM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = StarAlgorithmWithHMMAndPHHM; sourceTree = BUILT_PRODUCTS_DIR; };
-		D45D7DB91DEA4140000CF27C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../../../../../../Desktop/StarAlgorithmWithHMMAndPHHM/StarAlgorithmWithHMMAndPHHM/main.cpp; sourceTree = BUILT_PRODUCTS_DIR; };
-		D45D7DC11DEB34CC000CF27C /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		D45D7DB61DEA4140000CF27C /* StarAlgorithmWithHMMAndPHHM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = StarAlgorithmWithHMMAndPHHM; path = /Users/mahmutakyol/Documents/git/StarAlgorithmWithHMMAndPHHM/build/Debug/StarAlgorithmWithHMMAndPHHM; sourceTree = "<absolute>"; };
+		D4EF51CB1E1D91E100C0E7BD /* StarAlgorithm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StarAlgorithm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,26 +37,8 @@
 		D45D7DAD1DEA4140000CF27C = {
 			isa = PBXGroup;
 			children = (
-				D45D7DB81DEA4140000CF27C /* StarAlgorithmWithHMMAndPHHM */,
-				D45D7DB71DEA4140000CF27C /* Products */,
+				D4EF51CB1E1D91E100C0E7BD /* StarAlgorithm */,
 			);
-			sourceTree = "<group>";
-		};
-		D45D7DB71DEA4140000CF27C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D45D7DB61DEA4140000CF27C /* StarAlgorithmWithHMMAndPHHM */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D45D7DB81DEA4140000CF27C /* StarAlgorithmWithHMMAndPHHM */ = {
-			isa = PBXGroup;
-			children = (
-				D45D7DB91DEA4140000CF27C /* main.cpp */,
-				D45D7DC11DEB34CC000CF27C /* input.txt */,
-			);
-			path = StarAlgorithmWithHMMAndPHHM;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -100,7 +77,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D45D7DB11DEA4140000CF27C /* Build configuration list for PBXProject "StarAlgorithmWithHMMAndPHHM" */;
+			buildConfigurationList = D45D7DB11DEA4140000CF27C /* Build configuration list for PBXProject "StarAlgorithm" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -108,7 +85,7 @@
 				en,
 			);
 			mainGroup = D45D7DAD1DEA4140000CF27C;
-			productRefGroup = D45D7DB71DEA4140000CF27C /* Products */;
+			productRefGroup = D45D7DAD1DEA4140000CF27C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -122,7 +99,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D45D7DBA1DEA4140000CF27C /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +211,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D45D7DB11DEA4140000CF27C /* Build configuration list for PBXProject "StarAlgorithmWithHMMAndPHHM" */ = {
+		D45D7DB11DEA4140000CF27C /* Build configuration list for PBXProject "StarAlgorithm" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D45D7DBB1DEA4140000CF27C /* Debug */,
